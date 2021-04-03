@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
 
 const getData = async (endpoint) => {
@@ -33,6 +34,13 @@ const filterDataByCurrentUser = (data, currentUserId) => {
   };
 };
 
+const propTypes = {
+  /* url to fetch data from */
+  endpoint: PropTypes.string,
+  /* the current user's id */
+  userId: PropTypes.number,
+};
+
 const Blog = ({
   endpoint,
   userId,
@@ -64,4 +72,9 @@ const Blog = ({
   );
 }
 
+Blog.propTypes = propTypes;
 export default Blog;
+export {
+  getData,
+  filterDataByCurrentUser
+};
