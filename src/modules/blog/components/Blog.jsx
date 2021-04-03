@@ -68,7 +68,7 @@ const Blog = ({
 
   return (
     <div className={'Blog'}>
-      <PostList postData={currentUserData} title={`${userId} Posts`}></PostList>
+      <PostList postData={currentUserData} title={`${userId}'s Posts`}></PostList>
       <PostList postData={otherUserData} title={'Other Posts'}></PostList>
     </div>
   );

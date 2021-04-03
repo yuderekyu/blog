@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Post.css';
 
 const propTypes = {
   title: PropTypes.string.isRequired,
@@ -12,10 +13,10 @@ const Post = ({
   body = '',
   userId,
 }) => (
-  <article>
+  <article className={'Post'}>
     <h1>{title}</h1>
     <p>{body}</p>
-    <footer>{userId}</footer>
+    <footer>{`Author: ${userId}`}</footer>
   </article>
 );
 
