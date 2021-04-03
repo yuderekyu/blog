@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
+import PostList from './PostList.jsx';
+import './Blog.css';
 
 const getData = async (endpoint) => {
   try {
@@ -36,9 +38,9 @@ const filterDataByCurrentUser = (data, currentUserId) => {
 
 const propTypes = {
   /* url to fetch data from */
-  endpoint: PropTypes.string,
+  endpoint: PropTypes.string.isRequired,
   /* the current user's id */
-  userId: PropTypes.number,
+  userId: PropTypes.number.isRequired,
 };
 
 const Blog = ({
@@ -63,11 +65,12 @@ const Blog = ({
     currentUserData,
     otherUserData,
   } = filterDataByCurrentUser(data, userId);
-  console.log(currentUserData);
-  console.log(otherUserData);
 
   return (
-    'test'
+    <div className={'Blog'}>
+      <PostList postData={currentUserData} title={`${userId} Posts`}></PostList>
+      <PostList postData={otherUserData} title={'Other Posts'}></PostList>
+    </div>
   );
 };
 
