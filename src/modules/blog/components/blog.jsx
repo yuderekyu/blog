@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
 
 const getData = async (endpoint) => {
   try {
@@ -14,7 +15,7 @@ const getData = async (endpoint) => {
   }
 };
 
-const divideDataByCurrentUser = (data, currentUserId) => {
+const filterDataByCurrentUser = (data, currentUserId) => {
   const currentUserData = [];
   const otherUserData = [];
   data.forEach(currObj => {
@@ -36,16 +37,27 @@ const Blog = ({
   endpoint,
   userId,
 }) => {
-  // fetch blog post data using react-query
-  // use userId to divide blog post data
-  getData(endpoint).then(data => {
-    const {
-      currentUserData,
-      otherUserData,
-    } = divideDataByCurrentUser(data, userId);
-    console.log(currentUserData);
-    console.log(otherUserData);
-  });
+  const {
+    isLoading,
+    isError,
+    data,
+    error
+  } = useQuery('posts', () => getData(endpoint));
+
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
+
+  const {
+    currentUserData,
+    otherUserData,
+  } = filterDataByCurrentUser(data, userId);
+  console.log(currentUserData);
+  console.log(otherUserData);
 
   return (
     'test'
