@@ -46,17 +46,16 @@ const Blog = ({
   userId,
 }) => {
   const {
-    isLoading,
-    isError,
+    status,
     data,
     error
   } = useQuery('posts', () => getData(endpoint));
 
-  if (isLoading) {
+  if (status === 'loading') {
     return <span>Loading...</span>;
   }
 
-  if (isError) {
+  if (status === 'error') {
     return <span>Error: {error.message}</span>;
   }
 
@@ -70,7 +69,7 @@ const Blog = ({
   return (
     'test'
   );
-}
+};
 
 Blog.propTypes = propTypes;
 export default Blog;
