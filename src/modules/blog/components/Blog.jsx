@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
-import PostList from './PostList.jsx';
+import { PostList } from '.';
+import { Error, Loading } from '../../common/components';
 import './Blog.css';
 
 const getData = async (endpoint) => {
@@ -19,6 +20,13 @@ const getData = async (endpoint) => {
 };
 
 const filterDataByCurrentUser = (data, currentUserId) => {
+  if (!data || !data.length) {
+    return {
+      currentUserData: '',
+      otherUserData: '',
+    };
+  }
+
   const currentUserData = [];
   const otherUserData = [];
   data.forEach(currObj => {
@@ -53,18 +61,18 @@ const Blog = ({
     error
   } = useQuery('posts', () => getData(endpoint));
 
-  if (status === 'loading') {
-    return <span>Loading...</span>;
-  }
-
-  if (status === 'error') {
-    return <span>Error: {error.message}</span>;
-  }
-
   const {
     currentUserData,
     otherUserData,
-  } = filterDataByCurrentUser(data, userId);
+  } = useMemo(() => filterDataByCurrentUser(data, userId), [data, userId]);
+
+  if (status === 'loading') {
+    return <Loading />;
+  }
+
+  if (status === 'error') {
+    return <Error message={error.message} />;
+  }
 
   return (
     <div className={'Blog'}>

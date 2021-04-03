@@ -14,7 +14,7 @@ const Post = ({
   userId,
 }) => (
   <article className={'Post'}>
-    <h1>{title}</h1>
+    <h2>{title}</h2>
     <p>{body}</p>
     <footer>{`Author: ${userId}`}</footer>
   </article>

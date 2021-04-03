@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Post from './Post.jsx';
+import { Post } from '.';
 import './PostList.css';
 
 const propTypes = {
@@ -21,7 +21,7 @@ const PostList = ({
         body={post.body}
         userId={post.userId}
         key={post.id}
-      ></Post>
+      />
     ));
   };
 
