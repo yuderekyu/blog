@@ -8,8 +8,8 @@ import './Blog.css';
 const filterDataByCurrentUser = (data, currentUserId) => {
   if (!data || !data.length) {
     return {
-      currentUserData: '',
-      otherUserData: '',
+      currentUserData: undefined,
+      otherUserData: undefined,
     };
   }
 
