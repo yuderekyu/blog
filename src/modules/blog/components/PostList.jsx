@@ -11,8 +11,8 @@ const propTypes = {
 };
 
 const PostList = ({
-  postData,
-  title
+  postData = [],
+  title = '',
 }) => {
   const buildPosts = () => {
     return postData.map(post => (

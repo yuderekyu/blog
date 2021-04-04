@@ -1,23 +1,9 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useQuery } from 'react-query';
+import { useFetch } from '../../common/fetch';
 import { PostList } from '.';
 import { Error, Loading } from '../../common/components';
 import './Blog.css';
-
-const getData = async (endpoint) => {
-  try {
-    const response = await fetch(endpoint);
-    if (response.status > 199 && response.status < 300) {
-      return response.json();
-    }
-
-    const { status, statusText } = response;
-    throw new Error(`status: ${status} statusText: ${statusText}`);
-  } catch(err) {
-    throw err;
-  }
-};
 
 const filterDataByCurrentUser = (data, currentUserId) => {
   if (!data || !data.length) {
@@ -59,7 +45,7 @@ const Blog = ({
     status,
     data,
     error
-  } = useQuery('posts', () => getData(endpoint));
+  } = useFetch(endpoint, 'posts');
 
   const {
     currentUserData,
@@ -85,6 +71,5 @@ const Blog = ({
 Blog.propTypes = propTypes;
 export default Blog;
 export {
-  getData,
   filterDataByCurrentUser
 };
