@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { ErrorBoundary } from '.';
+import { ErrorBoundary } from '..';
 
 describe('ErrorBoundary', () => {
   it('renders the error component if an error is thrown within children', () => {
