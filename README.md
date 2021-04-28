@@ -1,4 +1,4 @@
-# Excercise Instructions
+# Exercise Instructions
 **Please limit your time working on this exercise to four hours.**
 
 Please create a React and Redux application implementing the following feature: displaying blog post data from the following web service:
